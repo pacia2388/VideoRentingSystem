@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using VideoRentingSystem.Models;
+using VideoRentingSystem.ViewModels;
 
 namespace VideoRentingSystem.Controllers
 {
@@ -43,6 +44,25 @@ namespace VideoRentingSystem.Controllers
                 return HttpNotFound();
             }
             return View(customer);
+        }
+
+        public ActionResult New()
+        {
+            var membershipType = _context.MembershipTypes.ToList();
+            var viewmodel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipType
+            };
+            return View(viewmodel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customer");
         }
     }
 }
