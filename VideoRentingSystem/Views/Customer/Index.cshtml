@@ -4,6 +4,8 @@
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+@Html.ActionLink("New Customer", "New", "Customer",null, new { @class = "btn btn-default" })
 
 <h2>Customers</h2>
 @if (!Model.Any())
@@ -14,19 +16,22 @@ else
 {
     <table class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th>Customer</th>
-            <th>Membership Type</th>
-        </tr>
+            <tr>
+                <th>Customer</th>
+                <th>Membership Type</th>
+                <th>Action</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var customer in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(customer.Name,"Details","Customer", new {id=customer.Id}, null)</td>
-                <td>@customer.MembershipType.Name</td>
-            </tr>
-        }
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name, "Details", "Customer", new { id = customer.Id }, null)</td>
+                    <td>@customer.MembershipType.Name</td>
+                    <td>@Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id }, null) | 
+                    @Html.ActionLink("Delete", "Delete", "Customer", new { id = customer.Id }, null)</td>
+                </tr>
+            }
         </tbody>
     </table>
 }

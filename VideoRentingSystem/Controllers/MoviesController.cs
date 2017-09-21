@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using VideoRentingSystem.Models;
+using VideoRentingSystem.ViewModels;
 
 namespace VideoRentingSystem.Controllers
 {
@@ -43,6 +44,26 @@ namespace VideoRentingSystem.Controllers
             }
 
             return View(movie);
+        }
+
+        public ActionResult New()
+        {
+            var viewmodel = new MovieFormViewModel
+            {
+                Genre = _context.
+            };
+            return View();
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Save()
+        {
+            return View();
         }
     }
 }
