@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using VideoRentingSystem.Models;
@@ -26,6 +27,7 @@ namespace VideoRentingSystem.Controllers
             var movies = _context.Movies.Include(m => m.Genre).ToList();
             return View(movies);
         }
+
         //        private List<Movie> GetMovies()
         //        {
         //            return new System.Collections.Generic.List<Movie>()
@@ -50,20 +52,41 @@ namespace VideoRentingSystem.Controllers
         {
             var viewmodel = new MovieFormViewModel
             {
-                Genre = _context.
+                Genres = _context.Genres.ToList()
             };
-            return View();
+            return View("MovieForm", viewmodel);
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            return View();
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+            var viewmodel = new MovieFormViewModel
+            {
+                Genres = _context.Genres.ToList(),
+                Movie = movie
+            };
+            return View("MovieForm", viewmodel);
         }
 
         [HttpPost]
-        public ActionResult Save()
+        public ActionResult Save(Movie movie)
         {
-            return View();
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+                movieInDb.Name = movie.Name;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.NumberInStock = movie.NumberInStock;
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
         }
     }
 }
