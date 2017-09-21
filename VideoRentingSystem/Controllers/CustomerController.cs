@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using VideoRentingSystem.Models;
 
@@ -21,7 +22,7 @@ namespace VideoRentingSystem.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var customer = _context.Customers.ToList();
+            var customer = _context.Customers.Include(c => c.MembershipType).ToList();
             return View(customer);
         }
 
