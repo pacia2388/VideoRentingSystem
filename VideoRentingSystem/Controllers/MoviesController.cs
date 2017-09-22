@@ -50,7 +50,7 @@ namespace VideoRentingSystem.Controllers
 
         public ActionResult New()
         {
-            var viewmodel = new MovieFormViewModel
+            var viewmodel = new MovieFormViewModel()
             {
                 Genres = _context.Genres.ToList()
             };
@@ -60,17 +60,25 @@ namespace VideoRentingSystem.Controllers
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
-            var viewmodel = new MovieFormViewModel
+            var viewmodel = new MovieFormViewModel(movie)
             {
-                Genres = _context.Genres.ToList(),
-                Movie = movie
+                Genres = _context.Genres.ToList()
             };
             return View("MovieForm", viewmodel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewmodel = new MovieFormViewModel(movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+                return View("MovieForm", viewmodel);
+            }
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
