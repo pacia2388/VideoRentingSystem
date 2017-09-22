@@ -21,7 +21,7 @@ namespace VideoRentingSystem.Controllers
             _context.Dispose();
         }
 
-        // GET: Movies
+        // GET: /Movies
         public ActionResult Index()
         {
             var movies = _context.Movies.Include(m => m.Genre).ToList();
@@ -37,26 +37,28 @@ namespace VideoRentingSystem.Controllers
         //            };
         //        }
 
+        // GET: /Movies/1
         public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
             if (movie == null)
-            {
                 return HttpNotFound();
-            }
+
 
             return View(movie);
         }
 
+        // GET: /Movies/New
         public ActionResult New()
         {
-            var viewmodel = new MovieFormViewModel()
+            var viewmodel = new MovieFormViewModel
             {
                 Genres = _context.Genres.ToList()
             };
             return View("MovieForm", viewmodel);
         }
 
+        // GET: /Movies/Edit/1
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -67,6 +69,7 @@ namespace VideoRentingSystem.Controllers
             return View("MovieForm", viewmodel);
         }
 
+        // POST: /Movies/Save
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
@@ -93,6 +96,18 @@ namespace VideoRentingSystem.Controllers
                 movieInDb.NumberInStock = movie.NumberInStock;
             }
 
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
+        }
+
+        //POST: /Movies/Delete/1
+        public ActionResult Delete(int id)
+        {
+            var movie = _context.Movies.Single(m => m.Id == id);
+            if (movie == null)
+                return HttpNotFound();
+
+            _context.Movies.Remove(movie);
             _context.SaveChanges();
             return RedirectToAction("Index", "Movies");
         }

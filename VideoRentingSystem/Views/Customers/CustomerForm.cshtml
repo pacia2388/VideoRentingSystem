@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Customer Form</h2>
-@using (Html.BeginForm("Save", "Customer"))
+@using (Html.BeginForm("Save", "Customers"))
 {
     @Html.ValidationSummary(false,"Please fix the following error")
     <div class="form-group">
