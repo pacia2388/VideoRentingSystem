@@ -15,6 +15,7 @@ namespace VideoRentingSystem.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name = "Date of Birth")]
+        [Min18YearsOfAge]
         public DateTime? BirthDate { get; set; }
     }
 }

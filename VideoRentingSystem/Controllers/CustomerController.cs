@@ -51,6 +51,7 @@ namespace VideoRentingSystem.Controllers
             var membershipType = _context.MembershipTypes.ToList();
             var viewmodel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = membershipType
             };
             return View("CustomerForm", viewmodel);
