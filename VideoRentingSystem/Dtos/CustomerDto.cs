@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using VideoRentingSystem.Models;
 
 namespace VideoRentingSystem.Dtos
 {
@@ -16,7 +15,7 @@ namespace VideoRentingSystem.Dtos
 
         public byte MembershipTypeId { get; set; }
 
-        [Min18YearsOfAge]
+        //        [Min18YearsOfAge]
         public DateTime? BirthDate { get; set; }
     }
 }
