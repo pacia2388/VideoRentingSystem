@@ -1,7 +1,9 @@
-﻿using System.Web.Http;
+﻿using AutoMapper;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using VideoRentingSystem.App_Start;
 
 namespace VideoRentingSystem
 {
@@ -9,6 +11,7 @@ namespace VideoRentingSystem
     {
         protected void Application_Start()
         {
+            Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
