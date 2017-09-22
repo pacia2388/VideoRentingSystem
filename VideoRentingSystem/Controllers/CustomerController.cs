@@ -59,6 +59,15 @@ namespace VideoRentingSystem.Controllers
         [HttpPost]
         public ActionResult Save(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewmodel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewmodel);
+            }
             if (customer.Id == 0)
             {
                 _context.Customers.Add(customer);
