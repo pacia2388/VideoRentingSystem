@@ -10,11 +10,12 @@ namespace VideoRentingSystem.App_Start
         {
             // Domain to Dto
             Mapper.CreateMap<Customer, CustomerDto>();
-            Mapper.CreateMap<CustomerDto, Customer>();
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
+            Mapper.CreateMap<Movie, MovieDto>();
+            Mapper.CreateMap<Genre, GenreDto>();
 
             // Dto to Domain
-            Mapper.CreateMap<Movie, MovieDto>()
+            Mapper.CreateMap<CustomerDto, Customer>()
                 .ForMember(c => c.Id, opt => opt.Ignore());
             Mapper.CreateMap<MovieDto, Movie>()
                 .ForMember(m => m.Id, opt => opt.Ignore());
