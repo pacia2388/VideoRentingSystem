@@ -21,23 +21,14 @@ namespace VideoRentingSystem.Controllers
             _context.Dispose();
         }
 
-        // GET: /Movies
         public ActionResult Index()
         {
-//            var movies = _context.Movies.Include(m => m.Genre).ToList();
-//            return View(movies);
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
 
-            return View();
+            return View("ReadOnlyList");
         }
 
-        //        private List<Movie> GetMovies()
-        //        {
-        //            return new System.Collections.Generic.List<Movie>()
-        //            {
-        //                new Movie {Id = 1, Name = "Shrek"},
-        //                new Movie {Id = 2, Name = "Wall-e"}
-        //            };
-        //        }
 
         // GET: /Movies/1
         public ActionResult Details(int id)
@@ -51,6 +42,7 @@ namespace VideoRentingSystem.Controllers
         }
 
         // GET: /Movies/New
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var viewmodel = new MovieFormViewModel
@@ -113,5 +105,24 @@ namespace VideoRentingSystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Movies");
         }
+
+
+        // API not yet implemented
+        // GET: /Movies
+        //        public ActionResult Index()
+        //        {
+        //            var movies = _context.Movies.Include(m => m.Genre).ToList();
+        //            return View(movies);
+        //            return View();
+        //        }
+
+        //        private List<Movie> GetMovies()
+        //        {
+        //            return new System.Collections.Generic.List<Movie>()
+        //            {
+        //                new Movie {Id = 1, Name = "Shrek"},
+        //                new Movie {Id = 2, Name = "Wall-e"}
+        //            };
+        //        }
     }
 }

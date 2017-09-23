@@ -13,7 +13,7 @@ namespace VideoRentingSystem.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709230957200_SeedUsers"; }
+            get { return "201709231018483_SeedUsers"; }
         }
         
         string IMigrationMetadata.Source
