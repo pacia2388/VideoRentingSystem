@@ -15,6 +15,8 @@ namespace VideoRentingSystem.Dtos
 
         public byte MembershipTypeId { get; set; }
 
+        public MembershipTypeDto MembershipType { get; set; }
+
         //        [Min18YearsOfAge]
         public DateTime? BirthDate { get; set; }
     }

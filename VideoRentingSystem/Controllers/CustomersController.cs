@@ -20,12 +20,17 @@ namespace VideoRentingSystem.Controllers
             _context.Dispose();
         }
 
-        // GET: /Customer
+        //         GET: /Customer
         public ActionResult Index()
         {
-            var customer = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customer);
+            //return the structure of the page
+            // jquery ajax fetches data from customer api
+            // var customer = _context.Customers.Include(c => c.MembershipType).ToList();
+            // return View(customer);
+
+            return View();
         }
+
 
         //        private List<Customer> GetCustomers()
         //        {
