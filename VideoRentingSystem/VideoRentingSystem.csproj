@@ -332,6 +332,12 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Movies\MovieForm.cshtml" />
+    <Content Include="Views\Before starting the client side development - Backup\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Before starting the client side development - Backup\Customers\Details.cshtml" />
+    <Content Include="Views\Before starting the client side development - Backup\Customers\Index.cshtml" />
+    <Content Include="Views\Before starting the client side development - Backup\Movies\Details.cshtml" />
+    <Content Include="Views\Before starting the client side development - Backup\Movies\Index.cshtml" />
+    <Content Include="Views\Before starting the client side development - Backup\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
