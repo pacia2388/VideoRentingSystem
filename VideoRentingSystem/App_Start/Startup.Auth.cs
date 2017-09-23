@@ -1,10 +1,10 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using System;
 using VideoRentingSystem.Models;
 
 namespace VideoRentingSystem
@@ -34,7 +34,7 @@ namespace VideoRentingSystem
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -54,15 +54,15 @@ namespace VideoRentingSystem
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "153262681937401",
+               appSecret: "4ccf2cb50968892f45ccb1bae0ff1878");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1020384905337-gokg004fn7ccd2k9tau5se9fr1l3balj.apps.googleusercontent.com",
+                ClientSecret = "OA6Kh4oSkuHZqBrLKmHbawsN"
+            });
         }
     }
 }

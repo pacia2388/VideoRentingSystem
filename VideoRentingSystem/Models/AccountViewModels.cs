@@ -8,6 +8,10 @@ namespace VideoRentingSystem.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Driving License")]
+        public string DriversLicense { get; set; }
     }
 
     public class ExternalLoginListViewModel
