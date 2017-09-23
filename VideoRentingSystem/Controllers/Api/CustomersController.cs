@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using VideoRentingSystem.Dtos;
@@ -48,9 +47,7 @@ namespace VideoRentingSystem.Controllers.Api
         public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
 
             var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
             _context.Customers.Add(customer);
@@ -80,7 +77,7 @@ namespace VideoRentingSystem.Controllers.Api
 
             _context.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok();
         }
 
         // DELETE: /api/customers/1
@@ -95,7 +92,7 @@ namespace VideoRentingSystem.Controllers.Api
             _context.Customers.Remove(customerInDb);
             _context.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok();
         }
     }
 }

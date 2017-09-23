@@ -4,7 +4,7 @@
     ViewBag.Title = "Customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Customer Form</h2>
+<h2>@Model.Title</h2>
 @using (Html.BeginForm("Save", "Customers"))
 {
     @Html.ValidationSummary(false,"Please fix the following error")
