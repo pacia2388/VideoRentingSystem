@@ -152,7 +152,8 @@ namespace VideoRentingSystem.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    DriversLicense = model.DriversLicense
+                    DriversLicense = model.DriversLicense,
+                    PhoneNumber = model.PhoneNumber
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -380,7 +381,8 @@ namespace VideoRentingSystem.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    DriversLicense = model.DriversLicense
+                    DriversLicense = model.DriversLicense,
+                    PhoneNumber = model.PhoneNumber
                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
