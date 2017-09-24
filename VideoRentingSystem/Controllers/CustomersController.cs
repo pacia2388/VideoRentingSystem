@@ -28,7 +28,8 @@ namespace VideoRentingSystem.Controllers
             // var customer = _context.Customers.Include(c => c.MembershipType).ToList();
             // return View(customer);
 
-            return View();
+            var customers = _context.Customers.ToList();
+            return View(customers);
         }
 
 

@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<VideoRentingSystem.Models.Customer>*@
+﻿@model IEnumerable<VideoRentingSystem.Models.Customer>
 
 @{
     ViewBag.Title = "Customers";
@@ -8,6 +8,14 @@
 @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-default" })
 
 <h2>Customers</h2>
+
+<ul>
+    @foreach (var customer in Model)
+    {
+        <li>@customer.Name - @customer.MembershipType.Name</li>
+    }
+</ul>
+
 @*@if (!Model.Any())*@
 @*{*@
 @*    <p>We don't have any customers yet.</p>*@
