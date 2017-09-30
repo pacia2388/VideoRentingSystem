@@ -28,14 +28,19 @@ namespace VideoRentingSystem.Controllers.Api
         [ResponseType(typeof(IEnumerable<MovieDto>))]
         public IHttpActionResult GetMovies(string query = null)
         {
-            var moviesQuery = _context.Movies.Include(m => m.Genre);
+            var moviesQuery = _context.Movies
+                .Include(m => m.Genre)
+                .Where(m => m.NumberAvailable > 0);
 
             if (!String.IsNullOrWhiteSpace(query))
             {
-                moviesQuery = moviesQuery.Where(m => m.Name.Contains(query));
+                moviesQuery = moviesQuery
+                    .Where(m => m.Name.Contains(query));
             }
 
-            var moviesDtos = moviesQuery.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            var moviesDtos = moviesQuery
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDto>);
 
             return Ok(moviesDtos);
         }
