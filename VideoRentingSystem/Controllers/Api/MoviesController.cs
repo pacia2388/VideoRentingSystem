@@ -26,12 +26,18 @@ namespace VideoRentingSystem.Controllers.Api
 
         // GET: /api/movies
         [ResponseType(typeof(IEnumerable<MovieDto>))]
-        public IHttpActionResult GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            return Ok(_context.Movies
-                .Include(m => m.Genre)
-                .ToList()
-                .Select(Mapper.Map<Movie, MovieDto>));
+            var moviesQuery = _context.Movies.Include(m => m.Genre);
+
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                moviesQuery = moviesQuery.Where(m => m.Name.Contains(query));
+            }
+
+            var moviesDtos = moviesQuery.ToList().Select(Mapper.Map<Movie, MovieDto>);
+
+            return Ok(moviesDtos);
         }
 
         // GET: /api/movie/1
