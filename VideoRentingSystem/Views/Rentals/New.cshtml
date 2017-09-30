@@ -15,14 +15,19 @@
         <label for="movie">Movie</label>
         <input id="movie" type="text" value="" class="form-control" />
     </div>
+
+    <ul id="movies" class="list-group"></ul>
+
     <button class="btn btn-primary">Submit</button>
 </form>
 
 @section scripts
 {
     <script>
-        $(document).ready(function() {
-            vm = {};
+        $(document).ready(function () {
+            vm = {
+                movieIds: []
+            };
 
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -43,30 +48,33 @@
             });
 
             $('#customer').typeahead({
-                    minLength: 3,
-                    highlight: true
-                },
+                minLength: 3,
+                highlight: true
+            },
                 {
                     name: 'customers',
                     display: 'name',
                     source: customers
-                }).on("typeahed:select",
-                function(e, customer) {
-                    vm.customerId = customer.id;
+                }).on("typeahead:select",
+                function (e, customer) {
+                    customerId = customer.id;
                 });
 
-        $('#movie').typeahead({
+            $('#movie').typeahead({
                 minLength: 3,
                 highlight: true
             },
-            {
-                name: 'movies',
-                display: 'name',
-                source: movies
-            }).on("typeahed:select",
-            function(e, movie) {
-                vm.movieId = movie.id;
-            });
-    });
+                {
+                    name: 'movies',
+                    display: 'name',
+                    source: movies
+                }).on("typeahead:select",
+                function (e, movie) {
+                    $("#movies").append("<li>" + movie.name + "</li> ");
+
+                $("#movie").typeahead("val", "");
+                vm.movieIds.push(movie.id);
+                });
+        });
     </script>
 }
